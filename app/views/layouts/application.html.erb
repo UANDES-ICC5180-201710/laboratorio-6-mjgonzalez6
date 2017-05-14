@@ -6,15 +6,66 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
+  <nav class="navbar navbar-toggleable-md navbar-dark  ">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav1">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="courses">Couses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="people">People</a>
+                </li>
+                <li class="nav-item">
+                  <% if model_signed_in? %>
+                    <a class = "nav-link">
+                      <%= link_to('Logout', destroy_model_session_path, :method => :delete) %>
+                    </a>
+                  <%end%>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
   <body>
-    <%= link_to 'courses', courses_path %>
-    <%= link_to 'people', people_path %>
-    <% if @course %>
-      <div>
-        <%= render 'courses/navbar', course: @course %>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+
+
+
       </div>
+
+      <% if @course %>
+        <div>
+          <%= render 'courses/navbar', course: @course %>
+        </div>
+        <% end%>
+    </nav>
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
     <% end %>
     <%= yield %>
   </body>
